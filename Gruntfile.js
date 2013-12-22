@@ -29,7 +29,7 @@ module.exports = function(grunt) {
       release: {
         files: [
           { extend: true,
-            src: ['components/jquery/jquery.min.js', 'images/*', 'manifest.json'],
+            src: ['images/*', 'manifest.json'],
             dest: 'release/'}
         ]
       }
@@ -45,7 +45,8 @@ module.exports = function(grunt) {
       },
       release: {
         files: {
-          'release/js/main.js': ['js/main.js']
+          'release/js/main.js': ['js/main.js'],
+          'release/components/jquery/jquery.min.js': ['components/jquery/jquery.js']
         }
       }
     }
