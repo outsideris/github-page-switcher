@@ -24,7 +24,31 @@ module.exports = function(grunt) {
         }
       }
     },
-    watch: {}
+    watch: {},
+    copy: {
+      release: {
+        files: [
+          { extend: true,
+            src: ['components/jquery/jquery.min.js', 'images/*', 'manifest.json'],
+            dest: 'release/'}
+        ]
+      }
+    },
+    clean: {
+      release: [
+        'release'
+      ]
+    },
+    uglify: {
+      options: {
+        mangle: false
+      },
+      release: {
+        files: {
+          'release/js/main.js': ['js/main.js']
+        }
+      }
+    }
   });
 
   // These plugins provide necessary tasks.
@@ -36,4 +60,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', []);
   grunt.registerTask('test', []);
   grunt.registerTask('lint', ['jshint']);
+  grunt.registerTask('release', ['clean:release', 'copy:release', 'uglify:release']);
 };
