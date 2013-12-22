@@ -1,0 +1,28 @@
+{
+  "name": "Github page switcher",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "show one-touch button between github repository and github page",
+  "icons": {
+    "16": "images/icon_016.png",
+    "128": "images/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "http://*.github.io/*"
+      ],
+      "js": [
+        "components/jquery/jquery.min.js",
+        "js/main.js"
+      ],
+      "css": [
+      ]
+    }
+  ],
+  "permissions": [
+    "https://github.com/",
+    "https://*.github.io/"
+  ]
+}

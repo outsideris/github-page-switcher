@@ -11,6 +11,9 @@ module.exports = function(grunt) {
       },
       gruntfile: {
         src: 'Gruntfile.js'
+      },
+      js: {
+        src: 'js/**/*.js'
       }
     },
     connect: {
