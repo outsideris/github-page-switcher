@@ -10,13 +10,13 @@
     // check whether github repo or github page
     var regexp, currentUrl, matched;
     if (location.host === 'github.com') {
-      regexp = /github\.com\/(\w+)\/(\w+)/;
+      regexp = /github\.com\/([\w-]+)\/([\w-]+)/;
       currentUrl = location.host + location.pathname;
       matched = currentUrl.match(regexp);
 
       return 'http://' + matched[1] + '.github.io/' + matched[2];
     } else if (/github\.io/.test(location.host)) {
-      regexp = /(\w+)\.github.io\/(\w+)\//;
+      regexp = /([\w-]+)\.github.io\/([\w-]+)\//;
       currentUrl = location.host + location.pathname;
       matched = currentUrl.match(regexp);
 
