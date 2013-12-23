@@ -1,6 +1,6 @@
 {
   "name": "Github page switcher",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "manifest_version": 2,
   "description": "show one-touch button between github repository and github page",
   "icons": {

@@ -17,6 +17,9 @@ You can download [Chrome Web Store](https://chrome.google.com/webstore/detail/gi
 
 ## Changelog
 
+### 0.2.0
+* fix bugs
+
 ### 0.1.0
 * first release
 
