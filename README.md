@@ -9,7 +9,7 @@ but some of them are not.
 
 so this extension add a link(right on bottom) to go to repogitory or page.(if exist)
 
-You can download [Chrome Web Store](https://chrome.google.com/webstore/detail/github-page-switcher/hndlnhncbcihlpofblflckedkhdjieoe)
+You can download in [Chrome Web Store](https://chrome.google.com/webstore/detail/github-page-switcher/hndlnhncbcihlpofblflckedkhdjieoe)
 
 ## Screenshots
 
