@@ -14,6 +14,7 @@
     }
   ],
   "scripts": {
+    "lint": "eslint js",
     "build": "parcel build js/main.js -o page-switcher --detailed-report --target browser",
     "clean": "rimraf dist",
     "copy-files": "cpy manifest.json images/*.png dist",
@@ -21,6 +22,9 @@
   },
   "devDependencies": {
     "cpy-cli": "^2.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
     "parcel-bundler": "^1.8.1",
     "rimraf": "^2.6.2"
   },

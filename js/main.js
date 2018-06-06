@@ -5,19 +5,22 @@
  */
 const makeUrl = () => {
   // check whether github repo or github page
-  if (location.host === 'github.com') {
+  const { host, pathname } = window.location;
+  if (host === 'github.com') {
     const regexp = /github\.com\/([\w-]+)\/([\w-]+)/;
-    const currentUrl = location.host + location.pathname;
+    const currentUrl = host + pathname;
     const matched = currentUrl.match(regexp);
 
     return matched ? `https://${matched[1]}.github.io/${matched[2]}/` : null;
-  } else if (/github\.io/.test(location.host)) {
+  } else if (/github\.io/.test(host)) {
     const regexp = /([\w-]+)\.github.io\/([\w-]+)\//;
-    const currentUrl = location.host + location.pathname;
+    const currentUrl = host + pathname;
     const matched = currentUrl.match(regexp);
 
     return `https://github.com/${matched[1]}/${matched[2]}/`;
   }
+
+  return null;
 };
 
 const checkRepoOrPage = (url) => {
@@ -30,16 +33,16 @@ const checkRepoOrPage = (url) => {
 
       return true;
     });
-}
+};
 
 const makeButton = (url) => {
   let text = '';
   let alt = '';
 
-  if (location.host === 'github.com') {
+  if (window.location.host === 'github.com') {
     text = 'P';
     alt = 'go to the github page';
-  } else if (/github\.io/.test(location.host)) {
+  } else if (/github\.io/.test(window.location.host)) {
     text = 'R';
     alt = 'Go to the github repository';
   }
@@ -66,7 +69,7 @@ const makeButton = (url) => {
 const url = makeUrl();
 if (url) {
   checkRepoOrPage(url)
-    .then(function(isExist) {
+    .then((isExist) => {
       if (isExist) {
         makeButton(url);
       }
