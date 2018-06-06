@@ -13,14 +13,16 @@
       "url": "http://outsider.mit-license.org/"
     }
   ],
+  "scripts": {
+    "build": "parcel build js/main.js -o page-switcher --detailed-report --target browser",
+    "clean": "rimraf dist",
+    "copy-files": "cpy manifest.json images/*.png dist",
+    "prebuild": "npm run clean && npm run copy-files"
+  },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.7"
+    "cpy-cli": "^2.0.0",
+    "parcel-bundler": "^1.8.1",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {}
 }

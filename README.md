@@ -1,8 +1,6 @@
 Github page switcher for chrome extension
 -----------------------
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-
 Many projects on github provide their github page.
 some of them provide properly link to github page on repogitory site and vice versa,
 but some of them are not.
