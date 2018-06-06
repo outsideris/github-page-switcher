@@ -3,79 +3,72 @@
  * Licensed under the MIT license.
  * <http://outsider.mit-license.org/>
  */
-(function() {
-  'use strict';
+const makeUrl = () => {
+  // check whether github repo or github page
+  if (location.host === 'github.com') {
+    const regexp = /github\.com\/([\w-]+)\/([\w-]+)/;
+    const currentUrl = location.host + location.pathname;
+    const matched = currentUrl.match(regexp);
 
-  var makeUrl = function() {
-    // check whether github repo or github page
-    var regexp, currentUrl, matched;
-    if (location.host === 'github.com') {
-      regexp = /github\.com\/([\w-]+)\/([\w-]+)/;
-      currentUrl = location.host + location.pathname;
-      matched = currentUrl.match(regexp);
+    return matched ? `https://${matched[1]}.github.io/${matched[2]}/` : null;
+  } else if (/github\.io/.test(location.host)) {
+    const regexp = /([\w-]+)\.github.io\/([\w-]+)\//;
+    const currentUrl = location.host + location.pathname;
+    const matched = currentUrl.match(regexp);
 
-      return matched ? 'https://' + matched[1] + '.github.io/' + matched[2] + '/' : null;
-    } else if (/github\.io/.test(location.host)) {
-      regexp = /([\w-]+)\.github.io\/([\w-]+)\//;
-      currentUrl = location.host + location.pathname;
-      matched = currentUrl.match(regexp);
+    return `https://github.com/${matched[1]}/${matched[2]}/`;
+  }
+};
 
-      return 'https://github.com/' + matched[1] + '/' + matched[2] + '/';
-    }
-  };
+const checkRepoOrPage = (url) => {
+  const options = { method: 'HEAD' };
+  return fetch(url, options)
+    .then((response) => {
+      if (response.status !== 200) {
+        return false;
+      }
 
-  var checkRepoOrPage = function(url) {
-    var options = { method: 'HEAD' };
-    return fetch(url, options)
-      .then(function(response) {
-        if (response.status !== 200) {
-          return false;
-        }
+      return true;
+    });
+}
 
-        return true;
-      });
+const makeButton = (url) => {
+  let text = '';
+  let alt = '';
+
+  if (location.host === 'github.com') {
+    text = 'P';
+    alt = 'go to the github page';
+  } else if (/github\.io/.test(location.host)) {
+    text = 'R';
+    alt = 'Go to the github repository';
   }
 
-  var makeButton = function(url) {
-    var text = '',
-        alt = '';
+  const btn = document.createElement('a');
+  btn.textContent = text;
+  btn.setAttribute('title', alt);
+  btn.setAttribute('href', url);
+  btn.style.position = 'fixed';
+  btn.style.right = '20px';
+  btn.style.bottom = '20px';
+  btn.style.backgroundColor = '#333332';
+  btn.style.color = '#fff';
+  btn.style.width = '30px';
+  btn.style.height = '30px';
+  btn.style.fontWeight = 700;
+  btn.style.fontSize = '25px';
+  btn.style.textAlign = 'center';
+  btn.style.lineHeight = '30px';
 
-    if (location.host === 'github.com') {
-      text = 'P';
-      alt = 'go to the github page';
-    } else if (/github\.io/.test(location.host)) {
-      text = 'R';
-      alt = 'Go to the github repository';
-    }
+  document.querySelector('body').appendChild(btn);
+};
 
-    var btn = document.createElement('a');
-    btn.textContent = text;
-    btn.setAttribute('title', alt);
-    btn.setAttribute('href', url);
-    btn.style.position = 'fixed';
-    btn.style.right = '20px';
-    btn.style.bottom = '20px';
-    btn.style.backgroundColor = '#333332';
-    btn.style.color = '#fff';
-    btn.style.width = '30px';
-    btn.style.height = '30px';
-    btn.style.fontWeight = 700;
-    btn.style.fontSize = '25px';
-    btn.style.textAlign = 'center';
-    btn.style.lineHeight = '30px';
-
-    document.querySelector('body').appendChild(btn);
-  };
-
-  var url = makeUrl();
-  if (url) {
-    checkRepoOrPage(url)
-      .then(function(isExist) {
-        if (isExist) {
-          makeButton(url);
-        }
-      });
-  }
-
-})();
-
+const url = makeUrl();
+if (url) {
+  checkRepoOrPage(url)
+    .then(function(isExist) {
+      if (isExist) {
+        makeButton(url);
+      }
+    });
+}
