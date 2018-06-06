@@ -17,6 +17,9 @@ You can download in [Chrome Web Store](https://chrome.google.com/webstore/detail
 
 ## Changelog
 
+### 0.3.0
+* make work again
+
 ### 0.2.0
 * fix bugs
 
