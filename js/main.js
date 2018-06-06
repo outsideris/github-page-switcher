@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 JeongHoon Byun aka "Outsider", <http://blog.outsider.ne.kr/>
+ * Copyright (c) 2018 JeongHoon Byun aka "Outsider", <http://blog.outsider.ne.kr/>
  * Licensed under the MIT license.
  * <http://outsider.mit-license.org/>
  */
@@ -14,29 +14,27 @@
       currentUrl = location.host + location.pathname;
       matched = currentUrl.match(regexp);
 
-      return matched ? 'http://' + matched[1] + '.github.io/' + matched[2] : null;
+      return matched ? 'https://' + matched[1] + '.github.io/' + matched[2] + '/' : null;
     } else if (/github\.io/.test(location.host)) {
       regexp = /([\w-]+)\.github.io\/([\w-]+)\//;
       currentUrl = location.host + location.pathname;
       matched = currentUrl.match(regexp);
 
-      return 'https://github.com/' + matched[1] + '/' + matched[2];
+      return 'https://github.com/' + matched[1] + '/' + matched[2] + '/';
     }
   };
 
-  var checkRepoOrPage = function(url, callback) {
-    $.ajax({
-      type: 'HEAD',
-      async: true,
-      url: url,
-      success: function() {
-        callback(true);
-      },
-      error: function() {
-        callback(false);
-      }
-    });
-  };
+  var checkRepoOrPage = function(url) {
+    var options = { method: 'HEAD' };
+    return fetch(url, options)
+      .then(function(response) {
+        if (response.status !== 200) {
+          return false;
+        }
+
+        return true;
+      });
+  }
 
   var makeButton = function(url) {
     var text = '',
@@ -50,30 +48,33 @@
       alt = 'Go to the github repository';
     }
 
-    $('<a>').text(text).attr('title', alt)
-      .attr('href', url)
-      .css({
-        position:'fixed',
-        right: '20px',
-        bottom: '20px',
-        backgroundColor: '#333332',
-        color: '#fff',
-        width: '30px',
-        height: '30px',
-        fontWeight: 700,
-        fontSize: '25px',
-        textAlign: 'center',
-        lineHeight: '30px'
-      }).appendTo('body');
+    var btn = document.createElement('a');
+    btn.textContent = text;
+    btn.setAttribute('title', alt);
+    btn.setAttribute('href', url);
+    btn.style.position = 'fixed';
+    btn.style.right = '20px';
+    btn.style.bottom = '20px';
+    btn.style.backgroundColor = '#333332';
+    btn.style.color = '#fff';
+    btn.style.width = '30px';
+    btn.style.height = '30px';
+    btn.style.fontWeight = 700;
+    btn.style.fontSize = '25px';
+    btn.style.textAlign = 'center';
+    btn.style.lineHeight = '30px';
+
+    document.querySelector('body').appendChild(btn);
   };
 
   var url = makeUrl();
   if (url) {
-    checkRepoOrPage(url, function(isExist) {
-      if (isExist) {
-        makeButton(url);
-      }
-    });
+    checkRepoOrPage(url)
+      .then(function(isExist) {
+        if (isExist) {
+          makeButton(url);
+        }
+      });
   }
 
 })();

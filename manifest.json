@@ -11,15 +11,14 @@
     {
       "matches": [
         "https://github.com/*",
+        "https://*.github.io/*",
         "http://*.github.io/*"
       ],
       "js": [
         "page-switcher.js"
       ],
-      "css": [
-      ]
+      "css": []
     }
   ],
-  "permissions": [
-  ]
+  "permissions": []
 }
