@@ -7,6 +7,8 @@
     "url": "http://blog.outsider.ne.kr/"
   },
   "private": true,
+  "source": "js/main.js",
+  "main": "dist/page-switcher.js",
   "licenses": [
     {
       "type": "MIT",
@@ -15,9 +17,9 @@
   ],
   "scripts": {
     "lint": "eslint js",
-    "build": "parcel build js/main.js -o page-switcher --detailed-report --target browser",
+    "build": "parcel build js/main.js --detailed-report --no-source-maps",
     "clean": "rimraf dist",
-    "copy-files": "cpy manifest.json images/*.png dist",
+    "copy-files": "cpy manifest.json js/background.js images/*.png dist",
     "prebuild": "npm run clean && npm run copy-files"
   },
   "devDependencies": {
@@ -25,8 +27,9 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "parcel-bundler": "^1.8.1",
+    "parcel": "^2.5.0",
     "rimraf": "^2.6.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }
