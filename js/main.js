@@ -12,7 +12,9 @@ const makeUrl = () => {
     const matched = currentUrl.match(regexp);
 
     return matched ? `https://${matched[1]}.github.io/${matched[2]}/` : null;
-  } else if (/github\.io/.test(host)) {
+  }
+
+  if (/github\.io/.test(host)) {
     const regexp = /([\w-]+)\.github.io\/([\w-]+)\//;
     const currentUrl = host + pathname;
     const matched = currentUrl.match(regexp);
@@ -23,13 +25,11 @@ const makeUrl = () => {
   return null;
 };
 
-const checkRepoOrPage = (url) => {
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage({ url }, (response) => {
-      resolve(response.exist);
-    });
+const checkRepoOrPage = (url) => new Promise((resolve) => {
+  chrome.runtime.sendMessage({ url }, (response) => {
+    resolve(response.exist);
   });
-};
+});
 
 const makeButton = (url) => {
   let text = '';

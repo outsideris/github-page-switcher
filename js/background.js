@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
+  (request, sender, sendResponse) => {
     fetch(request.url, { method: 'HEAD' })
       .then((response) => {
         if (response.status !== 200) {
@@ -9,4 +9,5 @@ chrome.runtime.onMessage.addListener(
         return sendResponse({ exist: true });
       });
     return true;
-  });
+  },
+);
