@@ -20,7 +20,7 @@
     "build": "parcel build js/main.js --detailed-report --no-source-maps",
     "clean": "rimraf dist",
     "copy-files": "cpy --flat manifest.json js/background.js images/*.png dist",
-    "prebuild": "npm run clean && npm run copy-files"
+    "prebuild": "npm run copy-files"
   },
   "devDependencies": {
     "cpy-cli": "^4.1.0",
