@@ -24,15 +24,11 @@ const makeUrl = () => {
 };
 
 const checkRepoOrPage = (url) => {
-  const options = { method: 'HEAD' };
-  return fetch(url, options)
-    .then((response) => {
-      if (response.status !== 200) {
-        return false;
-      }
-
-      return true;
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ url }, (response) => {
+      resolve(response.exist);
     });
+  });
 };
 
 const makeButton = (url) => {
