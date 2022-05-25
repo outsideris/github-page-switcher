@@ -17,6 +17,10 @@ You can download in [Chrome Web Store](https://chrome.google.com/webstore/detail
 
 ## Changelog
 
+### 0.4.0
+* make work again
+* update manifest to v3
+
 ### 0.3.0
 * make work again
 
