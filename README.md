@@ -1,4 +1,4 @@
-Github page switcher for chrome extension
+GitHub page switcher for chrome extension
 -----------------------
 
 Many projects on github provide their github page.
@@ -11,9 +11,9 @@ You can download in [Chrome Web Store](https://chrome.google.com/webstore/detail
 
 ## Screenshots
 
-![](https://raw.github.com/outsideris/github-page-switcher/master/doc/screenshots/screenshot1.gif)
+![](https://raw.github.com/outsideris/github-page-switcher/main/doc/screenshots/screenshot1.gif)
 
-![](https://raw.github.com/outsideris/github-page-switcher/master/doc/screenshots/screenshot2.gif)
+![](https://raw.github.com/outsideris/github-page-switcher/main/doc/screenshots/screenshot2.gif)
 
 ## Changelog
 
